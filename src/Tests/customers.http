@@ -1,0 +1,10 @@
+
+post http://localhost:5162/v1/customers
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@doe.com",
+  "Phone": "12345678900" ,
+  "birthDate": "1990-01-01"
+}
