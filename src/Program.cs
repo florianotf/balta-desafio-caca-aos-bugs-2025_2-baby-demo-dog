@@ -1,5 +1,6 @@
 using BugStore.Data;
 using BugStore.Handlers.Customers;
+using BugStore.Handlers.Products;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,12 @@ builder.Services.AddTransient<IGetCustomerHandler, GetCustomerHandler>();
 builder.Services.AddTransient<IGetByIdCustomerHandler, GetByIdCustomerHandler>();
 builder.Services.AddTransient<IUpdateCustomerHandler, UpdateCustomerHandler>();
 builder.Services.AddTransient<IDeleteCustomerHandler, DeleteCustomerHandler>();
+// Products handlers (fully-qualified to avoid ambiguous type names)
+builder.Services.AddTransient<ICreateProductHandler, CreateProductHandler>();
+builder.Services.AddTransient<IGetProductHandler, GetProductHandler>();
+builder.Services.AddTransient<IGetByIdProductHandler, GetByIdProductHandler>();
+builder.Services.AddTransient<IUpdateProductHandler, UpdateProductHandler>();
+builder.Services.AddTransient<IDeleteProductHandler, DeleteProductHandler>();
 var app = builder.Build();
 
 app.MapControllers();
