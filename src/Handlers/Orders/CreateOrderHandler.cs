@@ -1,39 +1,38 @@
 using BugStore.Data;
-using BugStore.Handlers.Customers;
-using BugStore.Requests.Customers;
-using BugStore.Responses.Customers;
+using BugStore.Models;
+using BugStore.Requests.Orders;
+using BugStore.Responses.Orders;
 
 namespace BugStore.Handlers.Orders;
 
-public class CreateCustomerHandler : ICreateCustomerHandler
+public class CreateOrderHandler : ICreateOrderHandler
 {
     private readonly AppDbContext _context;
 
-    public CreateCustomerHandler(AppDbContext context)
+    public CreateOrderHandler(AppDbContext context)
     {
         _context = context;
     }
 
-    public CreateCustomerResponse Handle(CreateCustomerRequest request)
+    public CreateOrderResponse Handle(CreateOrderRequest request)
     {
-        var result = _context.Customers.Add(new Models.Customer
+        var order = new Models.Order
         {
             Id = Guid.NewGuid(),
-            Name = request.Name,
-            Email = request.Email,
-            BirthDate = request.BirthDate,
-            Phone = request.Phone
-        });
+            CustomerId = request.CustomerId,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            Lines = request.Lines ?? new List<OrderLine>()
+        };
 
+        var result = _context.Orders.Add(order);
         _context.SaveChanges();
 
-        return new CreateCustomerResponse
+        return new CreateOrderResponse
         {
             Id = result.Entity.Id,
-            Name = result.Entity.Name,
-            Email = result.Entity.Email,
-            Phone = result.Entity.Phone,
-            BirthDate = result.Entity.BirthDate
+            CustomerId = result.Entity.CustomerId,
+            OrderDate = result.Entity.CreatedAt
         };
     }
 }

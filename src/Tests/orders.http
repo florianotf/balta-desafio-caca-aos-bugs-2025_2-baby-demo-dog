@@ -1,0 +1,29 @@
+
+POST http://localhost:5162/v1/orders
+Content-Type: application/json
+
+{
+  "customerId": "0f7a48d2-a9e9-4aea-ad1e-f63a38d3092b",
+  "lines": [
+    {
+      "productId": "6ae8248c-1e61-4483-a2dd-14887382a384",
+      "product": {
+        "id": "6ae8248c-1e61-4483-a2dd-14887382a384",
+        "name": "Dog Toy",
+        "slug": "dog-toy",
+        "title": "Dog Toy",
+        "description": "A durable chew toy for dogs.",
+        "price": 19.99
+      },
+      "quantity": 2,
+      "total": 39.98
+    }
+  ]
+}
+
+###
+
+GET http://localhost:5162/v1/orders/EF174AEB-24C3-46AF-9FBB-89F566D55A58
+Accept: application/json
+
+###

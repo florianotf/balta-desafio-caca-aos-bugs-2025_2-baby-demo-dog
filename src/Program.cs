@@ -20,6 +20,9 @@ builder.Services.AddTransient<IGetProductHandler, GetProductHandler>();
 builder.Services.AddTransient<IGetByIdProductHandler, GetByIdProductHandler>();
 builder.Services.AddTransient<IUpdateProductHandler, UpdateProductHandler>();
 builder.Services.AddTransient<IDeleteProductHandler, DeleteProductHandler>();
+// Orders handlers (fully-qualified to avoid ambiguous type names)
+builder.Services.AddTransient<BugStore.Handlers.Orders.ICreateOrderHandler, BugStore.Handlers.Orders.CreateOrderHandler>();
+builder.Services.AddTransient<BugStore.Handlers.Orders.IGetByIdOrderHandler, BugStore.Handlers.Orders.GetByIdOrderHandler>();
 var app = builder.Build();
 
 app.MapControllers();
