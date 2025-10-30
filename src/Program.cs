@@ -1,5 +1,4 @@
 using BugStore.Data;
-using BugStore.Handlers.CreateCustomerHandler;
 using BugStore.Handlers.Customers;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +9,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddTransient<ICreateCustomerHandler, CreateCustomerHandler>();
+builder.Services.AddTransient<IGetCustomerHandler, GetCustomerHandler>();
+builder.Services.AddTransient<IGetByIdCustomerHandler, GetByIdCustomerHandler>();
+builder.Services.AddTransient<IUpdateCustomerHandler, UpdateCustomerHandler>();
+builder.Services.AddTransient<IDeleteCustomerHandler, DeleteCustomerHandler>();
 var app = builder.Build();
 
 app.MapControllers();
-// app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => "Hello World!");
 
 // app.MapGet("/v1/customers", () => "Hello World!");
 // app.MapGet("/v1/customers/{id}", () => "Hello World!");

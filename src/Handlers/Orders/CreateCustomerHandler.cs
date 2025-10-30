@@ -1,8 +1,9 @@
 using BugStore.Data;
+using BugStore.Handlers.Customers;
 using BugStore.Requests.Customers;
 using BugStore.Responses.Customers;
 
-namespace BugStore.Handlers.Customers;
+namespace BugStore.Handlers.Orders;
 
 public class CreateCustomerHandler : ICreateCustomerHandler
 {
